@@ -7,7 +7,6 @@ const messageInput = document.querySelector('textarea[name="message"]');
 const savedValue =
   JSON.parse(localStorage.getItem('feedback-form-state')) || {};
 
-
 function saveValue() {
   const currentValue = {
     email: emailInput.value,
@@ -17,7 +16,6 @@ function saveValue() {
 }
 const throttledSaveValue = throttle(saveValue, 500);
 
-
 emailInput.addEventListener('input', throttledSaveValue);
 messageInput.addEventListener('input', throttledSaveValue);
 
@@ -26,12 +24,15 @@ messageInput.value = savedValue.message || '';
 
 function handleSubmit(event) {
   event.preventDefault();
-  const currentValue = {
-    email: emailInput.value,
-    message: messageInput.value,
-  };
-  console.log(currentValue);
-
+  if (emailInput.value === '' || messageInput.value === '') {
+    return alert('Заповни всі поля!!!');
+  } else {
+    const currentValue = {
+      email: emailInput.value,
+      message: messageInput.value,
+    };
+    console.log(currentValue);
+  }
   localStorage.removeItem('feedback-form-state');
   emailInput.value = '';
   messageInput.value = '';

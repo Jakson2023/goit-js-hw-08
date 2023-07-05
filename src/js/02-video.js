@@ -10,5 +10,5 @@ function dataTime(data) {
   localStorage.setItem('videoplayer-current-time', JSON.stringify(timeSet));
 }
 player.setCurrentTime(
-  JSON.parse(localStorage.getItem('videoplayer-current-time'))
+  JSON.parse(localStorage.getItem('videoplayer-current-time') || 0)
 );
